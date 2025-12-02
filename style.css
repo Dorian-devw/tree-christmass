@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #000;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- BOTÓN FLOTANTE --- */
+#btn-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #d42426;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-family: cursive; /* Simplificado por si no carga la fuente externa */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+#btn-menu:active { transform: scale(0.95); }
+
+/* --- ÁRBOL FULL SCREEN --- */
+#escenario {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#zona-arbol {
+    width: 100%;
+    height: 100%;
+    background-image: url('img/arbol_fondo.png'); 
+    background-size: cover; 
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    position: relative;
+    /* Cursor de mira para indicar que puedes colocar cosas */
+    cursor: crosshair; 
+}
+
+/* --- ESTILOS QUE TE FALTABAN (SOLUCIÓN AL ADORNO GIGANTE) --- */
+.adorno-puesto {
+    position: absolute;
+    
+    /* 1. TAMAÑO CONTROLADO */
+    width: 12%;           /* Ocupa el 12% del ancho de la pantalla */
+    max-width: 90px;      /* Nunca más grande de 90px */
+    height: auto;         /* Mantiene la proporción */
+    
+    /* 2. CENTRADO EXACTO */
+    transform: translate(-50%, -50%); /* Centra la imagen en el punto del clic */
+    
+    /* 3. PERMITIR CLIC A TRAVÉS (CRUCIAL) */
+    pointer-events: none; 
+    /* Esto hace que el adorno sea "fantasma" para el mouse/dedo. 
+       Así, si ella quiere moverlo, hará clic "a través" de él, 
+       tocar el árbol debajo y el código moverá el adorno. */
+    
+    z-index: 50; 
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5)); /* Sombrita estética */
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote */
+}
+
+/* Clase especial para guirnaldas y luces */
+.adorno-ancho {
+    /* Anulamos el ancho estándar */
+    width: 45% !important;  /* ¡Mucho más ancho! Ocupa casi la mitad del árbol */
+    max-width: 350px !important; /* Un límite mucho mayor para pantallas grandes */
+    
+    /* Ajuste opcional: si son luces, quizás quieras que brillen más */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8)) !important;
+}
+
+/* --- PANEL LATERAL DESLIZANTE --- */
+#panel-lateral {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+
+#panel-lateral.abierto {
+    right: 0;
+}
+
+.cabecera-panel {
+    background: #d42426;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.instrucciones {
+    padding: 10px;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin: 0;
+}
+
+.grid-adornos {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.item-caja {
+    aspect-ratio: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.item-caja img { width: 80%; height: 80%; object-fit: contain; }
+.item-caja.seleccionado { border: 2px solid #28a745; background: #e6ffea; }
+.item-caja.usado { opacity: 0.4; filter: grayscale(100%); pointer-events: none; }

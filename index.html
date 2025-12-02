@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nuestra Navidad</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <button id="btn-menu" onclick="toggleMenu()">
+        🎁 Adornos
+    </button>
+
+    <div id="escenario">
+        <div id="zona-arbol">
+            </div>
+    </div>
+
+    <div id="panel-lateral">
+        <div class="cabecera-panel">
+            <h3>Día <span id="dia-numero"></span></h3>
+            <button class="btn-cerrar" onclick="toggleMenu()">✖</button>
+        </div>
+        <p class="instrucciones">Elige uno y toca el árbol.</p>
+        
+        <div id="caja-adornos" class="grid-adornos">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
