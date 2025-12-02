@@ -109,7 +109,7 @@ zonaArbol.addEventListener('click', (e) => {
     if (diaActual > 25) return;
 
     if (!idAdornoSeleccionado) {
-        alert("¡Escoge un adorno de la caja primero!");
+        alert("¡Escoge un adorno de la caja primero!😂😂");
         return;
     }
 
@@ -175,4 +175,5 @@ function dibujarAdornoEnArbol(id, x, y, diaOwner) {
 
 // --- INICIALIZAR ---
 cargarEstado();
+
 renderizarCaja();
